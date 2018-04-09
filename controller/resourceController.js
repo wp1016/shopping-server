@@ -3,7 +3,7 @@
  * 资源接口列表
  * @Date: 2018-03-27 15:21:14 
  * @Last Modified by: wangpan
- * @Last Modified time: 2018-03-27 15:29:07
+ * @Last Modified time: 2018-04-03 16:17:10
  */
 
 const superagent = require("superagent");
@@ -26,7 +26,7 @@ const getResourceList = async (ctx, next) => {
     let payload = ctx.query;
     payload.isPrice = 1;
     try {
-        let data = await superagent.post(listUrl).set('Content-Type', 'application/json').send(payload)
+        let data = await superagent.post(listUrl).send(payload)
         ctx.body = data.text
     } catch (err) {
         ctx.throw(500, err)

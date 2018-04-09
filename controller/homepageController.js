@@ -3,7 +3,7 @@
  * 首页接口控制器
  * @Date: 2018-03-27 10:56:48 
  * @Last Modified by: wangpan
- * @Last Modified time: 2018-03-27 11:57:27
+ * @Last Modified time: 2018-04-09 17:59:28
  */
 
 const superagent = require('superagent');
@@ -213,7 +213,7 @@ const querySubjectList = async (ctx, next) => {
  * @param {any} next 
  */
 const searchMerchant = async (ctx, next) => {
-    let payload = req.query;
+    let payload = ctx.query;
     payload.merchant = {
         shopName: payload.shopName
     }
