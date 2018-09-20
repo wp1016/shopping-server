@@ -6,8 +6,8 @@
 
 var app = require('../app');
 var debug = require('debug')('demo:server');
-var http = require('http');
-
+var https = require('https');
+var fs = require('fs')
 /**
  * Get port from environment and store in Express.
  */
@@ -19,7 +19,16 @@ var port = normalizePort(process.env.PORT || '3001');
  * Create HTTP server.
  */
 
-var server = http.createServer(app.callback());
+// var server = http.createServer(app.callback());
+
+/**
+ * Create HTTPS server.
+ */
+var option = {
+  key: fs.readFileSync('/root/.acme.sh/ezwangpan.com/ezwangpan.com.key;'),
+  cert: fs.readdirSync(' /root/.acme.sh/ezwangpan.com/ca.cer')
+}
+var server = https.createServer(option, app.callback());
 
 /**
  * Listen on provided port, on all network interfaces.
@@ -58,9 +67,9 @@ function onError(error) {
     throw error;
   }
 
-  var bind = typeof port === 'string'
-    ? 'Pipe ' + port
-    : 'Port ' + port;
+  var bind = typeof port === 'string' ?
+    'Pipe ' + port :
+    'Port ' + port;
 
   // handle specific listen errors with friendly messages
   switch (error.code) {
@@ -83,8 +92,9 @@ function onError(error) {
 
 function onListening() {
   var addr = server.address();
-  var bind = typeof addr === 'string'
-    ? 'pipe ' + addr
-    : 'port ' + addr.port;
+  console.log('NODE is running in port：' + addr.port)
+  var bind = typeof addr === 'string' ?
+    'pipe ' + addr :
+    'port ' + addr.port;
   debug('Listening on ' + bind);
 }
