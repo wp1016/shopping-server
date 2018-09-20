@@ -25,8 +25,8 @@ var port = normalizePort(process.env.PORT || '3001');
  * Create HTTPS server.
  */
 var option = {
-  key: fs.readFileSync('/root/.acme.sh/ezwangpan.com/ezwangpan.com.key;'),
-  cert: fs.readdirSync(' /root/.acme.sh/ezwangpan.com/ca.cer')
+  key: fs.readFileSync('/root/.acme.sh/ezwangpan.com/ezwangpan.com.key'),
+  cert: fs.readdirSync('/root/.acme.sh/ezwangpan.com/ca.cer')
 }
 var server = https.createServer(option, app.callback());
 
